@@ -13,8 +13,8 @@
 
 <script>
 import { computed, defineComponent, ref, watch } from 'vue'
-import FastCommentsVueNext from 'fastcomments-vue-next'
 import { useAppearance } from '../../../composes/utils'
+import FastCommentsVueNext from 'fastcomments-vue-next'
 import * as baseStyle from '../../../assets/styles/fast-comments-base.css'
 import * as darkStyle from '../../../assets/styles/fast-comments-dark-theme.css'
 
@@ -24,14 +24,8 @@ export default defineComponent({
     FastCommentsVueNext,
   },
   props: {
-    id: {
-      type: String,
-      required: true,
-    },
-    sso: {
-      type: Object,
-      required: true,
-    },
+    id: { type: String, required: true },
+    sso: { type: Object, required: true },
   },
   async setup(props) {
     const { isDark } = useAppearance()
@@ -40,15 +34,13 @@ export default defineComponent({
 
     watch(
       () => isDark,
-      () => {
-        reRenderKey.value = !reRenderKey.value
-      },
+      () => (reRenderKey.value = !reRenderKey.value),
       { deep: true },
     )
 
-    const style = computed(() => {
-      return isDark.value ? darkStyle.default : baseStyle.default
-    })
+    const style = computed(() =>
+      isDark.value ? darkStyle.default : baseStyle.default,
+    )
 
     const dataFastComment = ref({
       tenantId: 'lprwn3v7q',
@@ -57,10 +49,9 @@ export default defineComponent({
       sso: props.sso,
       hasDarkBackground: isDark,
       showLiveRightAway: true,
-      onRender: () => {
-        isLoading.value = false
-      },
+      onRender: () => (isLoading.value = false),
     })
+
     return { isLoading, reRenderKey, dataFastComment }
   },
 })
