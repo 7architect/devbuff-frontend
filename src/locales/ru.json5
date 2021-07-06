@@ -1,5 +1,19 @@
 {
   "pages": {
+    preview: {
+      idea: {
+        info: {
+          date: "Последнее обновление",
+          status: {
+            title: 'Статус',
+            PUBLISH: 'Опубликована',
+            WAITING_FULL_TEAM: 'Идет набор в команду',
+            WORKING: 'Набор закрыт',
+          },
+        },
+        more: 'Подробнее'
+      }
+    },
     /** */
     "dashboard": {
       "notFound": "У вас нет идей",
@@ -10,11 +24,31 @@
       "onError": "Something wrong, try again."
     },
     explore: {
+      filter: {
+        date: 'Дата создания',
+        lastUpdate: 'Дата обновления'
+      },
       "notFound": "С заданными параметрами идей не найдено"
     },
     idea: {
+      info: {
+        date: "Последнее обновление",
+        status: {
+          title: 'Статус',
+          PUBLISH: 'Опубликована',
+          WAITING_FULL_TEAM: 'Идет набор в команду',
+          WORKING: 'Набор закрыт',
+        },
+        moderationStatus: {
+          title: 'Верификация идеи',
+          approved: 'Проверена',
+          waiting: 'Ожидает проверки'
+        }
+      },
       positions: {
-        label: "Позиции",
+        title: "Позиции",
+        titleLanguages: "Стэк языков",
+        titleTechnologies: "Стэк технологий",
         status: {
           NONE: "Откликнуться",
           PENDING: "Заявка отправлена",
@@ -23,8 +57,28 @@
       }
     }
   },
-  "components": {
-    "widget": {
+  components: {
+    widget: {
+      ideas: {
+        card: {
+          detail: {
+            specialist: 'Специалисты',
+            technologies: 'Технологии в проекте',
+            languages: 'Языки программирования',
+          },
+        },
+        filter: {
+          param: {
+            specialists: 'Специалисты',
+            languages: 'Языки программирования'
+          }
+        }
+      },
+      specialist: {
+        picker: {
+          title: 'Ваша команда'
+        }
+      }
     }
   },
   commons: {
@@ -37,6 +91,13 @@
       apple: 'Apple Developer',
       ML: 'ML Developer',
       microcontrollers: 'Microcontroller Developer',
-    }
+    },
+    specialistDescription: {
+      'back-end': 'Это специалист, который занимается внутренним устройством сайта или приложения. '
+    },
+    languages: {
+      CSharp: "C#",
+      CPlusPlus: 'C++'
+    },
   }
 }
