@@ -35,93 +35,31 @@
       <div class="col-span-2">
         <div class="-mt-12 mb-6 flex items-center">
           <span class="opacity-50">вы создатель</span>
-          <AtomicDropdown by-click>
+          <AtomicActions>
             <template #activator>
-              <div
-                role="button"
-                class="text-primary flex items-center ml-2"
-                v-focusable
-                @clock="toggleControls"
-              >
-                Управлять
-                <ChevronDownIcon />
+              <div class="text-primary flex items-center ml-2">
+                Быстрое управление <ChevronDownIcon />
               </div>
             </template>
 
-            <div class="flex justify-center items-center text-sm">
-              <AtomicButton
-                v-focusable.indexOnly
-                is-depressed
-                is-small
-                :type="
-                  idea.status === 'WAITING_FULL_TEAM' ? 'danger' : 'success'
-                "
-                @click="
-                  changeStatusIdea(
-                    idea.id,
-                    idea.status === 'WAITING_FULL_TEAM'
-                      ? 'DISABLE_SET_OF_CANDIDATES'
-                      : 'ENABLE_SET_OF_CANDIDATES',
-                  )
-                "
-              >
-                <div class="flex flex-col items-center justify-center">
-                  <StopIcon v-if="idea.status === 'WAITING_FULL_TEAM'" />
-                  <PlayIcon v-else />
-                  <span>{{
-                    idea.status === 'WAITING_FULL_TEAM'
-                      ? 'Остановить набор'
-                      : 'Продолжить набор'
-                  }}</span>
-                </div>
-              </AtomicButton>
-              <i
-                v-if="isOwnerIdea"
-                class="
-                  bg-gray-200
-                  dark:bg-blueGray-600
-                  mx-2
-                  w-px
-                  h-10
-                  opacity-20
-                "
-              />
-              <AtomicButton
-                v-if="isOwnerIdea"
-                type="primary"
-                is-depressed
-                is-small
-              >
-                <div class="flex flex-col items-center justify-center">
-                  <EditIcon />
-                  <span>Edit</span>
-                </div>
-              </AtomicButton>
-              <!-- TODO: use delimiter component or class -->
-              <i
-                v-if="isOwnerIdea"
-                class="
-                  bg-gray-200
-                  dark:bg-blueGray-600
-                  mx-2
-                  w-px
-                  h-10
-                  opacity-20
-                "
-              />
-              <AtomicButton
-                v-if="isOwnerIdea"
+            <div class="text-xs">
+              <AtomicAction
                 type="danger"
-                is-depressed
-                is-small
+                description="Все отклики будут удалены"
               >
-                <div class="flex flex-col items-center justify-center">
-                  <TrashIcon />
-                  <span>Delete</span>
-                </div>
-              </AtomicButton>
+                <template #icon><StopIcon /></template>
+                Stop company
+              </AtomicAction>
+              <AtomicAction type="danger" class="my-2">
+                <template #icon><TrashIcon /></template>
+                Delete idea
+              </AtomicAction>
+              <AtomicAction>
+                <template #icon><EditIcon /></template>
+                Edit idea
+              </AtomicAction>
             </div>
-          </AtomicDropdown>
+          </AtomicActions>
         </div>
 
         <AtomicCard>

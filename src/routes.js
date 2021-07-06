@@ -8,6 +8,12 @@ export default [
     meta: { name: 'Main' },
   },
   {
+    name: 'test',
+    path: '/test',
+    meta: { name: 'Main' },
+    component: () => import('./pages/test.vue'),
+  },
+  {
     name: 'explore',
     path: '/explore',
     component: () => import('./pages/explore.vue'),

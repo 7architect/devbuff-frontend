@@ -82,12 +82,12 @@ export default defineComponent({
           router.push({ query: { ...route.value.query, [name]: value } }),
       })
 
-    const router = useRouter()
-    const route = inject('backgroundRoute')
     const { isLoading, ideas, getIdeas } = useIdeas()
     const { getUserProfileUrl } = useUser()
-    const { t } = useI18n('pages.explore')
     const { isLoggedIn } = useAuth()
+    const { t } = useI18n('pages.explore')
+    const router = useRouter()
+    const route = inject('activeRoute')
     const specialists = filterQueryReactive('specialists')
     const languages = filterQueryReactive('languages')
     const filter = reactive({ specialists, languages })

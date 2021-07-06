@@ -32,8 +32,8 @@ module.exports = {
         ...colors.lightBlue,
       },
       secondary: {
-        DEFAULT: colors.yellow['500'],
-        ...colors.yellow,
+        DEFAULT: colors.violet['500'],
+        ...colors.violet,
       },
       success: {
         DEFAULT: colors.green['500'],
