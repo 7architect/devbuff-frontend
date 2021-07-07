@@ -41,7 +41,7 @@
       </AtomicCard>
 
       <div class="col-span-2">
-        <div class="-mt-12 mb-6 flex items-center">
+        <div class="mb-6 flex items-center">
           <span class="opacity-50">вы создатель</span>
           <AtomicActions>
             <template #activator>
@@ -50,11 +50,8 @@
               </div>
             </template>
 
-            <div class="text-xs">
-              <AtomicAction
-                type="danger"
-                description="Все отклики будут удалены"
-              >
+            <div class="text-xs flex flex-col">
+              <AtomicAction type="danger">
                 <template #icon><StopIcon /></template>
                 Stop company
               </AtomicAction>
@@ -120,24 +117,23 @@
               </AtomicLabel>
 
               <div v-if="!isOwnerIdea" class="mt-6">
-                <div
-                  role="button"
+                <AtomicButton
                   v-if="getStatusAtPosition(specialist.id) === 'NONE'"
                   @click="send(specialist.id)"
-                  :class="[
-                    'p-2 text-center text-primary bg-primary bg-opacity-10',
-                    'transition-all hover:bg-opacity-[0.15] rounded',
-                  ]"
+                  is-depressed
+                  class="w-full"
                 >
                   {{ t('positions.status.NONE') }}
-                </div>
+                </AtomicButton>
                 <div
                   v-else
-                  :class="[
-                    'w-full py-2 rounded',
-                    'text-center text-gray-400',
-                    'bg-gray-100',
-                  ]"
+                  class="
+                    w-full
+                    py-2
+                    text-center text-gray-400
+                    bg-gray-100
+                    rounded
+                  "
                 >
                   {{
                     t(`positions.status.${getStatusAtPosition(specialist.id)}`)
@@ -149,10 +145,8 @@
         </AtomicCard>
       </div>
       <div class="col-span-4">
-        <WidgetCommentsFast
-          :id="`idea-${idea.id}`"
-          :sso="ssoData"
-        />
+        <AtomicButton is-depressed>depressed</AtomicButton>
+        <WidgetCommentsFast :id="`idea-${idea.id}`" :sso="ssoData" />
       </div>
     </div>
   </div>

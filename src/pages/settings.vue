@@ -17,9 +17,9 @@
       :description="conflictMessage"
     />
   </div>
-  <div class="w-full grid grid-cols-12">
-    <h3 class="col-span-12">User data</h3>
-    <AtomicForm :data="data" @submit="onSubmit" class="col-span-12" />
+  <div class="w-full">
+    <h3 class="">User data</h3>
+    <AtomicForm :data="data" @submit="onSubmit" />
   </div>
   <div class="grid grid-cols-12">
     <h3 class="col-span-12">Skills settings</h3>

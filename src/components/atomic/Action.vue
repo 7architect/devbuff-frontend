@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <button>
     <div
-      v-focusable
-      class="flex items-center cursor-pointer group transition-colors"
+      class="inline-flex items-center cursor-pointer group transition-colors"
+      v-focusable.indexOnly
     >
       <div
         :class="[
@@ -18,26 +18,23 @@
             bg-opacity-[.15] rounded-full p-1
             group-hover:bg-opacity-20 group-active:bg-opacity-30
             transform group-active:scale-90
-         `,
+          `,
         ]"
       >
         <slot name="icon" />
       </div>
-      <div :class="{ 'ml-2': slots.icon && slots.default }">
+      <div v-if="slots.default" :class="slots.icon && slots.default && 'ml-2'">
         <slot />
       </div>
     </div>
-    <div v-if="description" class="text-xs my-1 opacity-30 flex leading-3">
-      <div class="w-[1.5em] m-2"></div>
-      {{ description }}
-    </div>
-  </div>
+  </button>
 </template>
 
 <script>
-import { defineComponent, useContext } from 'vue'
+import { defineComponent, useAttrs, useSlots } from 'vue'
 
 const types = ['primary', 'secondary', 'warning', 'danger', 'success', 'muted']
+
 export default defineComponent({
   name: 'AtomicAction',
   props: {
@@ -48,9 +45,13 @@ export default defineComponent({
       validate: (v) => types.includes(v),
     },
   },
-  setup(props) {
+  setup() {
+    const attrs = useAttrs()
+    const slots = useSlots()
+
     return {
-      ...useContext(),
+      attrs,
+      slots,
     }
   },
 })

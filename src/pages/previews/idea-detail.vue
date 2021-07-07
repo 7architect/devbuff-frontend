@@ -35,27 +35,31 @@
         }}
       </AtomicLabel>
     </div>
-    <div class="grid gap-2 grid-cols-12">
-      <AtomicCard class="mb-3 col-span-12">
+    <div class="">
+      <AtomicCard class="mb-3">
         <div v-html="idea.text" class="overflow-hidden" />
       </AtomicCard>
-      <div class="col-start-10">
-        <RouterLink
-          :to="{ name: 'idea-detail', params: { id: idea.id } }"
-          custom
-          v-slot="{ href, navigate }"
-        >
-          <AtomicButton :href="href" @click="navigate">
-            {{ t(`more`) }}
+
+      <RouterLink
+        :to="{ name: 'idea-detail', params: { id: idea.id } }"
+        custom
+        v-slot="{ href, navigate }"
+      >
+        <a :href="href" @click="navigate">
+          <AtomicButton is-depressed class="py-4 mt-6 w-full">
+            <div class="flex items-center">
+              <span class="mr-2">{{ t(`more`) }}</span>
+              <ArrowRightIcon />
+            </div>
           </AtomicButton>
-        </RouterLink>
-      </div>
+        </a>
+      </RouterLink>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 import { useIdea, useUser } from '../../composes/core'
 import { useTimeAgo, useTitle } from '@vueuse/core'
 import { useI18n } from '../../composes/utils'
@@ -64,31 +68,28 @@ import { useRoute, useRouter } from 'vue-router'
 export default defineComponent({
   name: 'IdeaDetailPreview',
   async setup() {
-    const route = useRoute()
-
+    const { dialog: route } = inject('route')
+    const { t } = useI18n('pages.preview.idea')
+    const { getUserProfileUrl, getUser, user } = useUser()
     const {
       idea,
-      languagesForSpecialist,
-      frameworksForSpecialist,
       getIdea,
       changeStatusIdea,
-    } = useIdea(route.params.id)
+      languagesForSpecialist,
+      frameworksForSpecialist,
+    } = useIdea(route.value.params.id)
 
-    const { t } = useI18n('pages.preview.idea')
-
-    const { getUserProfileUrl, getUser, user } = useUser()
+    const publishedAgo = useTimeAgo(idea.value.lastUpdateDate)
 
     await getIdea()
     await getUser()
 
-    const publishedAgo = useTimeAgo(idea.value.lastUpdateDate)
-
     useTitle(`${idea.value.name} - DevBuff`)
 
     return {
-      t,
       idea,
       publishedAgo,
+      t,
       changeStatusIdea,
       getUserProfileUrl,
       languagesForSpecialist,

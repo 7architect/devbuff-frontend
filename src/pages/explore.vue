@@ -86,8 +86,8 @@ export default defineComponent({
     const { getUserProfileUrl } = useUser()
     const { isLoggedIn } = useAuth()
     const { t } = useI18n('pages.explore')
+    const { main: route } = inject('route')
     const router = useRouter()
-    const route = inject('activeRoute')
     const specialists = filterQueryReactive('specialists')
     const languages = filterQueryReactive('languages')
     const filter = reactive({ specialists, languages })
@@ -95,8 +95,8 @@ export default defineComponent({
       async () => await getIdeas(filter),
       500,
     )
-    throttledGetIdeas()
 
+    throttledGetIdeas()
     watch(filter, throttledGetIdeas)
 
     return { t, ideas, filter, isLoading, getUserProfileUrl, isLoggedIn }

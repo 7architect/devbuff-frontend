@@ -41,7 +41,7 @@
 </style>
 
 <script>
-import { defineComponent, useCssModule, useContext } from 'vue'
+import { defineComponent, useCssModule, useAttrs, useSlots } from 'vue'
 import { useAppearance } from '../../composes/utils'
 
 export default defineComponent({
@@ -54,7 +54,8 @@ export default defineComponent({
   },
   setup() {
     const styles = useCssModule()
-    const { attrs, slots } = useContext()
+    const attrs = useAttrs()
+    const slots = useSlots()
     const { isDark } = useAppearance()
 
     return {

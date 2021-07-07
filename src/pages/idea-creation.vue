@@ -13,9 +13,9 @@
 
 <script>
 import { defineComponent } from 'vue'
-import * as yup from 'yup'
 import { useIdea } from '../composes/core'
 import { useRouter } from 'vue-router'
+import * as yup from 'yup'
 
 export default defineComponent({
   async setup() {

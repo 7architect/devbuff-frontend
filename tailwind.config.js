@@ -28,8 +28,8 @@ module.exports = {
       },
       muted: colors.gray[500],
       primary: {
-        DEFAULT: colors.lightBlue['500'],
-        ...colors.lightBlue,
+        DEFAULT: colors.sky['500'],
+        ...colors.sky,
       },
       secondary: {
         DEFAULT: colors.violet['500'],

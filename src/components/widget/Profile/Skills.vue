@@ -295,14 +295,14 @@ export default defineComponent({
       ChevronLeftIcon,
       user,
       skills,
-      onChangeSkill,
       specialists,
       frameworks,
+      t,
+      save,
+      onSwiper,
       nextSlide,
       prevSlide,
-      save,
-      t,
-      onSwiper,
+      onChangeSkill,
     }
   },
 })

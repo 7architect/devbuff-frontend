@@ -20,7 +20,10 @@ export default defineComponent({
     const { request } = useApi()
     const upload = (e) => {
       const file = e.target.files[0]
-      request('/photo/profile', { method: 'put', data: file })
+      const data = new FormData()
+
+      data.append('image', file)
+      request('/image', { method: 'post', data })
     }
 
     return { upload }

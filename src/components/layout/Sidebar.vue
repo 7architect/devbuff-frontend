@@ -2,7 +2,7 @@
   <aside>
     <nav>
       <router-link v-if="isLoggedIn" to="/" custom v-slot="{ navigate }">
-        <div class="mb-8">
+        <div class="mb-8 mx-2">
           <WidgetUser
             avatar-gradient-border
             :avatar="user.avatar"
@@ -10,7 +10,6 @@
             :lastname="user.lastName"
             :username="user.userName"
             @click="navigate"
-            class="block"
             v-focusable
           />
         </div>

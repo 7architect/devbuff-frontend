@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { defineComponent, useContext } from 'vue'
+import { defineComponent, useAttrs } from 'vue'
 
 export default defineComponent({
   name: 'WidgetDashboardIdeaCard',
@@ -67,8 +67,11 @@ export default defineComponent({
     },
   },
   setup() {
-    const { attrs } = useContext()
-    return { attrs }
+    const attrs = useAttrs()
+
+    return {
+      attrs,
+    }
   },
 })
 </script>

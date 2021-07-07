@@ -4,7 +4,7 @@
     <div class="grid grid-cols-10 gap-8 container mx-auto mt-8">
       <Sidebar class="col-span-2" />
       <div class="col-span-8">
-        <router-view :route="activeRoute" v-slot="{ Component, route }">
+        <router-view :route="mainRoute" v-slot="{ Component, route }">
           <template v-if="Component">
             <suspense>
               <div class="h-full container">
@@ -80,16 +80,16 @@ export default defineComponent({
 
     const router = useRouter()
     // fix vue-router length undefined
-    const activeRoute = shallowRef({ matched: [] }) // TODO: rename
+    const mainRoute = shallowRef({ matched: [] }) // TODO: rename
     const dialogRoute = shallowRef(null)
     const isDialog = ref(false)
     const error = ref(null)
     const breadcrumbs = computed(() => {
-      const breadcrumbs = activeRoute.value?.meta.breadcrumbs || []
+      const breadcrumbs = mainRoute.value?.meta.breadcrumbs || []
       const crumbRoutes = router.options.routes
         .filter((r) => breadcrumbs?.includes(r.name))
         .map((r) => ({ title: r.meta?.name, to: r.path }))
-      return [...crumbRoutes, { title: activeRoute.value.meta.name }]
+      return [...crumbRoutes, { title: mainRoute.value.meta.name }]
     })
 
     const back = () => router.back()
@@ -100,22 +100,21 @@ export default defineComponent({
 
       // Prevent reactive triggers if background route isn't changed
       const bgRoute = isDialog.value ? from : to
-      if (activeRoute.value.fullPath !== bgRoute.fullPath)
-        set(activeRoute, bgRoute)
+      if (mainRoute.value.fullPath !== bgRoute.fullPath) set(mainRoute, bgRoute)
       next()
     })
 
     onErrorCaptured((err) => set(error, err))
-    provide('backgroundRoute', activeRoute)
+    provide('route', { main: mainRoute, dialog: dialogRoute })
 
     const LayoutHeader = ref(null)
     return {
       isDialog,
-      activeRoute,
+      mainRoute,
       dialogRoute,
       breadcrumbs,
-      error,
       LayoutHeader,
+      error,
       back,
     }
   },
